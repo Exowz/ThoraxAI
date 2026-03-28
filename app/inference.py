@@ -1,28 +1,51 @@
 """Model loading, preprocessing, prediction, and Grad-CAM generation."""
 
+from pathlib import Path
+
 import numpy as np
 import streamlit as st
 import torch
 from PIL import Image
 from torchvision import transforms
 import cv2
+from huggingface_hub import hf_hub_download
 
 from src.config import IMAGENET_MEAN, IMAGENET_STD, IMG_SIZE, CHECKPOINT_DIR, get_device
 from src.model import create_model
 from src.eval import GradCAM
 
+HF_REPO_ID = "Exowz/ThoraxAI"
+
 
 @st.cache_resource
 def load_model(model_name: str):
+    print(f"Chargement {model_name}, checkpoint dir: {CHECKPOINT_DIR}")
+    print(f"Working directory: {Path.cwd()}")
+
     device = get_device()
     fine_tune = model_name != "cnn_baseline"
     model = create_model(model_name, fine_tune=fine_tune, device=device)
+
+    ckpt_filename = f"best_{model_name}.pt"
+    local_path = Path(CHECKPOINT_DIR) / ckpt_filename
+
+    if not local_path.exists():
+        local_path.parent.mkdir(parents=True, exist_ok=True)
+        hf_hub_download(
+            repo_id=HF_REPO_ID,
+            filename=ckpt_filename,
+            local_dir=str(local_path.parent),
+        )
+        print(f"Telecharge {ckpt_filename} vers {local_path}")
+        print(f"Fichier existe: {local_path.exists()}")
+
     try:
-        ckpt = torch.load(f"{CHECKPOINT_DIR}/best_{model_name}.pt", map_location=device)
+        ckpt = torch.load(local_path, map_location=device)
         model.load_state_dict(ckpt["model_state_dict"])
         model.eval()
         return model, device, True, ckpt.get("epoch", "?")
-    except FileNotFoundError:
+    except Exception as e:
+        print(f"Erreur chargement {model_name}: {e}")
         return model, device, False, None
 
 

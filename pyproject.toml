@@ -29,6 +29,7 @@ dependencies = [
 [project.optional-dependencies]
 demo = [
     "streamlit>=1.28.0",
+    "huggingface-hub>=0.20.0",
 ]
 kaggle = [
     "kaggle>=1.5.0",
