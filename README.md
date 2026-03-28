@@ -17,6 +17,7 @@
 ![Streamlit](https://img.shields.io/badge/Streamlit-1.28+-FF4B4B?style=flat&logo=streamlit&logoColor=white)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-1.3+-F7931E?style=flat&logo=scikit-learn&logoColor=white)
 ![UV](https://img.shields.io/badge/UV-package%20manager-5C4EE5?style=flat)
+![HuggingFace](https://img.shields.io/badge/HuggingFace-Models-yellow?style=flat&logo=huggingface&logoColor=white)
 
 **Models:**
 ![DenseNet121](https://img.shields.io/badge/DenseNet121-Best%20Model-success?style=flat)
@@ -30,6 +31,10 @@
 ![IG](https://img.shields.io/badge/Integrated%20Gradients-implemented-purple?style=flat)
 
 ---
+
+**[Tester l'application en ligne](https://thoraxai-exowz.streamlit.app)** | **[Modeles sur HuggingFace](https://huggingface.co/Exowz/ThoraxAI)**
+
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://thoraxai-exowz.streamlit.app)
 
 </div>
 
@@ -189,7 +194,11 @@ cd ThoraxAI
 # Installer les dependances avec UV
 uv sync --extra demo
 
-# Telecharger le dataset Kaggle
+# Les modeles (.pt) et les images exemples sont telecharges
+# automatiquement depuis HuggingFace Hub au premier lancement de l'app.
+# Aucun telechargement manuel n'est necessaire.
+
+# Telecharger le dataset Kaggle (uniquement pour re-entrainer)
 uv sync --extra kaggle
 uv run kaggle datasets download -d paultimothymooney/chest-xray-pneumonia
 unzip chest-xray-pneumonia.zip -d data/
@@ -210,6 +219,13 @@ uv run jupyter notebook notebooks/03_evaluation.ipynb
 # 4. Application Streamlit
 uv run streamlit run app.py
 ```
+
+## 🚀 Deploiement
+
+L'application est deployee sur **Streamlit Community Cloud** et accessible a l'adresse :
+**[thoraxai-exowz.streamlit.app](https://thoraxai-exowz.streamlit.app)**
+
+Les checkpoints des modeles et les images exemples sont heberges sur **[Hugging Face Hub](https://huggingface.co/Exowz/ThoraxAI)** et telecharges automatiquement au premier lancement. Cela permet un deploiement leger sans inclure les fichiers `.pt` dans le repo Git.
 
 ## 🔒 Reproductibilite
 
