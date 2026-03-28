@@ -1,0 +1,45 @@
+{
+    "dataset": {
+        "train": {
+            "NORMAL": 1341,
+            "PNEUMONIA": 3875
+        },
+        "val": {
+            "NORMAL": 8,
+            "PNEUMONIA": 8
+        },
+        "test": {
+            "NORMAL": 234,
+            "PNEUMONIA": 390
+        }
+    },
+    "ratios": {
+        "train": 2.89,
+        "val": 1.0,
+        "test": 1.67
+    },
+    "total_images": 5856,
+    "dimensions": {
+        "Largeur": {
+            "min": 453,
+            "max": 2633,
+            "moyenne": 1334,
+            "mediane": 1304
+        },
+        "Hauteur": {
+            "min": 178,
+            "max": 2578,
+            "moyenne": 994,
+            "mediane": 936
+        }
+    },
+    "formats": {
+        ".jpeg": 5856
+    },
+    "corrupted_images": 0,
+    "data_leakage": {
+        "duplicate_filenames_train_test": 0,
+        "shared_patients_train_test": 170,
+        "shared_patients_train_val": 0
+    }
+}

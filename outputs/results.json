@@ -1,0 +1,78 @@
+{
+    "models": {
+        "cnn_baseline": {
+            "accuracy": 0.8253,
+            "precision": 0.7873,
+            "recall": 0.9872,
+            "specificity": 0.5556,
+            "f1": 0.876,
+            "auc_roc": 0.9457,
+            "auc_pr": 0.9648,
+            "optimal_threshold": 0.89,
+            "confusion_matrix": {
+                "tn": 130,
+                "fp": 104,
+                "fn": 5,
+                "tp": 385
+            },
+            "epochs_trained": 11
+        },
+        "resnet18": {
+            "accuracy": 0.8574,
+            "precision": 0.8168,
+            "recall": 0.9949,
+            "specificity": 0.6282,
+            "f1": 0.8971,
+            "auc_roc": 0.9666,
+            "auc_pr": 0.9751,
+            "optimal_threshold": 0.89,
+            "confusion_matrix": {
+                "tn": 147,
+                "fp": 87,
+                "fn": 2,
+                "tp": 388
+            },
+            "epochs_trained": 2
+        },
+        "densenet121": {
+            "accuracy": 0.8878,
+            "precision": 0.854,
+            "recall": 0.9897,
+            "specificity": 0.7179,
+            "f1": 0.9169,
+            "auc_roc": 0.971,
+            "auc_pr": 0.9792,
+            "optimal_threshold": 0.89,
+            "confusion_matrix": {
+                "tn": 168,
+                "fp": 66,
+                "fn": 4,
+                "tp": 386
+            },
+            "epochs_trained": 10
+        },
+        "efficientnet": {
+            "accuracy": 0.8798,
+            "precision": 0.8523,
+            "recall": 0.9769,
+            "specificity": 0.7179,
+            "f1": 0.9104,
+            "auc_roc": 0.9703,
+            "auc_pr": 0.9829,
+            "optimal_threshold": 0.85,
+            "confusion_matrix": {
+                "tn": 168,
+                "fp": 66,
+                "fn": 9,
+                "tp": 381
+            },
+            "epochs_trained": 19
+        }
+    },
+    "config": {
+        "img_size": 224,
+        "batch_size": 32,
+        "seed": 42,
+        "val_split": 0.15
+    }
+}

@@ -1,0 +1,59 @@
+# Ctrl+C d'abord si git add tourne encore
+
+# Corriger le .gitignore
+cat > .gitignore << 'EOF'
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.uv/
+
+# Data
+data/
+samples/
+
+# Modeles entraines
+**/*.pt
+
+# Figures
+outputs/figures/*.png
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# UV lock
+uv.lock
+EOF
+
+# Repartir proprement
+rm -rf .git
+git init
+git branch -m main
+
+# Ajouter fichier par fichier (pas de git add .)
+git add .gitignore
+git add pyproject.toml README.md app.py
+git add src/
+git add app/
+git add notebooks/
+git add scripts/
+git add reports/
+git add outputs/results.json outputs/training_summary.json outputs/eda_summary.json
+
+# Verifier que rien de lourd ne passe
+git status
+
+# Si c'est propre, commit + push
+git commit -m "init: ThoraxAI - classification radiographies thoraciques par CNN"
+git remote add origin https://github.com/Exowz/ThoraxAI.git
+git push --force origin main
