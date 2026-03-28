@@ -56,4 +56,4 @@ git status
 # Si c'est propre, commit + push
 git commit -m "init: ThoraxAI - classification radiographies thoraciques par CNN"
 git remote add origin https://github.com/Exowz/ThoraxAI.git
-git push --force origin main
+git push --force origin main*.zip

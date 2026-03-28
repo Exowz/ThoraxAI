@@ -3,7 +3,11 @@
 import json
 from pathlib import Path
 
+import streamlit as st
+from huggingface_hub import snapshot_download
+
 SAMPLES_DIR = Path("samples")
+HF_REPO_ID = "Exowz/ThoraxAI"
 
 
 def load_results():
@@ -14,13 +18,30 @@ def load_results():
         return None
 
 
-def samples_available() -> bool:
+def _samples_present() -> bool:
     return (
         (SAMPLES_DIR / "NORMAL").is_dir()
         and (SAMPLES_DIR / "PNEUMONIA").is_dir()
         and any((SAMPLES_DIR / "NORMAL").iterdir())
         and any((SAMPLES_DIR / "PNEUMONIA").iterdir())
     )
+
+
+@st.cache_data
+def ensure_samples():
+    if not _samples_present():
+        print("Samples manquants, telechargement depuis HF Hub...")
+        snapshot_download(
+            repo_id=HF_REPO_ID,
+            allow_patterns=["samples/*"],
+            local_dir=".",
+        )
+        print(f"Telechargement termine, samples present: {_samples_present()}")
+
+
+def samples_available() -> bool:
+    ensure_samples()
+    return _samples_present()
 
 
 def list_samples(cls: str) -> list[Path]:
