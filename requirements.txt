@@ -8,5 +8,6 @@ scikit-learn
 Pillow
 opencv-python-headless
 tqdm
-streamlit
+streamlit>=1.32.0
 huggingface-hub
+altair<6
